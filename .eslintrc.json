@@ -1,0 +1,37 @@
+{
+  "root": true, // Tell ESLint this is the root config file,stop looking for configs in parent folders
+  "env": {
+    "browser": true, //Enables browser global variables (window, document, localStorage, etc.)
+    "es2021": true, //Enables ES2021 globals and syntax (Promise, BigInt, globalThis, etc.)
+    "node": true //Enables Node.js global variables and scope (process, __dirname, require, etc.)
+  },
+  "extends": [
+    "eslint:recommended", // Uses ESLint's recommended rule set (basic JavaScript rules)
+    "plugin:@typescript-eslint/recommended", //  Uses TypeScript ESLint's recommended  rules for TS code
+    "prettier" // Disables ESLint rules that conflict with Prettier formatting
+  ],
+  "parser": "@typescript-eslint/parser", //Specifies the parser to use (allows ESLint to understand TypeScript syntax)
+  "parserOptions": {
+    "ecmaVersion": "latest", //ALlows parsing of the latest ECMAScript features
+    "sourceType": "module" // Allows use of imports/exports (ES modules instead of CommonJS)
+  },
+  "plugins": ["@typescript-eslint"], //Adds TypeScript ESLint plugin (provides TS-specific linting rules)
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      //Warns about variables /imports that are declared but never used
+      "warn", // Severity level: "warn" (yellow) or "error" (red)
+      {
+        "argsIgnorePattern": "^_", //Ignores function arguments that start with underscore (e.g., _req, _id)
+        "varsIgnorePattern": "^_" //Ignores variables that start with underscore  (e.g., _temp, _data)
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": "warn", //Warns when using "any"type (encourages proper typing)
+    "no-console": [
+      // Warns about console statements (helps keep production code clean)
+      "warn",
+      {
+        "allow": ["log", "warn", "error"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "extends": [
+    "../../.eslintrc.json", //Inherit base ESLint config from workspace
+    "plugin:react/recommended", // Enable recommended React rules
+    "plugin:react-hooks/recommended", //Enable React Hooks rules
+    "plugin:jsx-a11y/recommended" // Enable recommended accessibility rules for JSX
+  ],
+  "plugins": ["react", "react-hooks", "jsx-a11y"], //Enable the plugins needed for the above rules
+  "settings": {
+    "react": {
+      "version": "detect" // Automatically detect React version for rules
+    }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off", // Turn off rule requiring React import in JSX (React 17+ handles this automatically)
+    "react/prop-types": "off", // Disable PropTypes checking (TypeScript usually replaces this)
+    "jsx-a11y/click-events-have-key-events": "warn", // Warn ì onClick exists without keyboard event for accessibility
+    "jsx-a11y/no-static-element-interactions": "warn" //Warn if a non-interactive element has event handlers
+  }
+}
