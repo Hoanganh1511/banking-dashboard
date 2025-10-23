@@ -29,7 +29,7 @@
     "db:migrate": "npm run migrate --workspace=apps/bff-service",
     "db:seed": "npm run seed --workspace=apps/bff-service",
     "db:studio": "npm run studio --workspace=apps/bff-service",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "keywords": [
     "banking",
@@ -43,14 +43,16 @@
   "author": "Your Name <your.email@example.com>",
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "concurrently": "^8.2.2",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
-    "husky": "^9.0.10",
-    "lint-staged": "^15.2.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
     "prettier": "^3.2.5",
     "typescript": "^5.3.3"
   },
