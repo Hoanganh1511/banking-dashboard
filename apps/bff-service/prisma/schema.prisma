@@ -1,0 +1,105 @@
+// This is your Prisma schema file
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===== MODELS =====
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  passwordHash  String    @map("password_hash")
+  firstName     String?   @map("first_name")
+  lastName      String?   @map("last_name")
+  emailVerified Boolean   @default(false) @map("email_verified")
+  
+  // Relations
+  accounts      Account[]
+  budgets       Budget[]
+  
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Account {
+  id          String        @id @default(uuid())
+  userId      String        @map("user_id")
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name        String
+  type        AccountType
+  balance     Decimal       @db.Decimal(15, 2)
+  currency    String        @default("USD")
+  
+  // Relations
+  transactions Transaction[]
+  
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt @map("updated_at")
+
+  @@index([userId])
+  @@map("accounts")
+}
+
+enum AccountType {
+  CHECKING
+  SAVINGS
+  CREDIT
+}
+
+model Transaction {
+  id          String          @id @default(uuid())
+  accountId   String          @map("account_id")
+  account     Account         @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  
+  amount      Decimal         @db.Decimal(15, 2)
+  type        TransactionType
+  category    String?
+  description String?
+  merchant    String?
+  date        DateTime        @default(now())
+  
+  createdAt   DateTime        @default(now()) @map("created_at")
+
+  @@index([accountId])
+  @@index([date])
+  @@index([category])
+  @@map("transactions")
+}
+
+enum TransactionType {
+  DEBIT
+  CREDIT
+}
+
+model Budget {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  category   String
+  amount     Decimal  @db.Decimal(15, 2)
+  period     Period
+  startDate  DateTime @map("start_date")
+  endDate    DateTime @map("end_date")
+  
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@index([userId])
+  @@index([category])
+  @@map("budgets")
+}
+
+enum Period {
+  MONTHLY
+  YEARLY
+}

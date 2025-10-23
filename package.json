@@ -71,6 +71,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.15",
+    "helmet": "^8.1.0",
     "tailwindcss": "^4.1.15"
   }
 }

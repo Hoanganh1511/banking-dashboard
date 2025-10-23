@@ -62,4 +62,77 @@
 
 ### Backend
 
+- Node.js 18, Express, TypeScript
+- Prisma ORM, PostgreSQL
+- Redis (caching)
+- JWT Authentication
+- Jest, Supertest
+
+### Database
+
+- **Primary:** PostgreSQL (Relational data)
+- **Cache:** Redis (Session data, frequently accessed data)
+
 ### Infrastructure
+
+- Docker, Docker Compose
+- AWS (S3, CloudFront, ECS, RDS)
+- Terraform (IaC)
+- Github Actions (CI/CD)
+
+## Design Pattern
+
+### 1. Backend for Frontend (BFF)
+
+### 2. Repository Pattern
+
+### 3. Dependency Injection
+
+## Security Considerations
+
+- HTTPS only
+- JWT Authentication
+- CORS configuration
+- Input validation
+- SQL injection prevention (Prisma ORM)
+- XSS protection
+- Rate limiting
+
+## Scalability
+
+- horizontal scaling for backend (ECS auto-scaling)
+- CDB for frontend (CloudFront)
+- Database read replicas (RDS)
+
+## Deployment
+
+- **Frontend**: S3 + CloudFront
+- **Backend**: ECS Fargate
+- **Database**: RDS PostgreSQL
+- **CI/CD**: GitHub Actions
+
+## 📁 Project Structure
+
+\`\`\`
+banking-dashboard/
+├── apps/
+│ ├── web-client/ # React frontend
+│ └── bff-service/ # Node.js backend
+├── packages/
+│ └── shared-types/ # Shared TypeScript types
+├── infrastructure/
+│ ├── terraform/ # IaC
+│ └── docker/ # Docker configs
+├── docs/ # Documentation
+└── .github/ # CI/CD workflows
+\`\`\`
+
+## 👤 Author
+
+**HoangTuanAnh**
+
+- GitHub: [@yourusername](https://github.com/yourusername)
+- LinkedIn: [Your Name](https://linkedin.com/in/yourname)
+- Email: your.email@example.com
+
+---
